@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ywl.mapper.boke.BlogPhotoMapper" >
+  <resultMap id="BaseResultMap" type="com.ywl.entity.BlogPhoto" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="blog_id" property="blogId" jdbcType="VARCHAR" />
+    <result column="pic" property="pic" jdbcType="VARCHAR" />
+    <result column="views" property="views" jdbcType="INTEGER" />
+    <result column="addtime" property="addtime" jdbcType="VARCHAR" />
+    <result column="uptime" property="uptime" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.ywl.entity.BlogPhoto" extends="BaseResultMap" >
+    <result column="introduce" property="introduce" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, blog_id, pic, views, addtime, uptime
+  </sql>
+  <sql id="Blob_Column_List" >
+    introduce
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from blog_photo
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from blog_photo
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.ywl.entity.BlogPhoto" >
+    insert into blog_photo (id, blog_id, pic, 
+      views, addtime, uptime, 
+      introduce)
+    values (#{id,jdbcType=VARCHAR}, #{blogId,jdbcType=VARCHAR}, #{pic,jdbcType=VARCHAR}, 
+      #{views,jdbcType=INTEGER}, #{addtime,jdbcType=VARCHAR}, #{uptime,jdbcType=VARCHAR}, 
+      #{introduce,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ywl.entity.BlogPhoto" >
+    insert into blog_photo
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="blogId != null" >
+        blog_id,
+      </if>
+      <if test="pic != null" >
+        pic,
+      </if>
+      <if test="views != null" >
+        views,
+      </if>
+      <if test="addtime != null" >
+        addtime,
+      </if>
+      <if test="uptime != null" >
+        uptime,
+      </if>
+      <if test="introduce != null" >
+        introduce,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="blogId != null" >
+        #{blogId,jdbcType=VARCHAR},
+      </if>
+      <if test="pic != null" >
+        #{pic,jdbcType=VARCHAR},
+      </if>
+      <if test="views != null" >
+        #{views,jdbcType=INTEGER},
+      </if>
+      <if test="addtime != null" >
+        #{addtime,jdbcType=VARCHAR},
+      </if>
+      <if test="uptime != null" >
+        #{uptime,jdbcType=VARCHAR},
+      </if>
+      <if test="introduce != null" >
+        #{introduce,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ywl.entity.BlogPhoto" >
+    update blog_photo
+    <set >
+      <if test="blogId != null" >
+        blog_id = #{blogId,jdbcType=VARCHAR},
+      </if>
+      <if test="pic != null" >
+        pic = #{pic,jdbcType=VARCHAR},
+      </if>
+      <if test="views != null" >
+        views = #{views,jdbcType=INTEGER},
+      </if>
+      <if test="addtime != null" >
+        addtime = #{addtime,jdbcType=VARCHAR},
+      </if>
+      <if test="uptime != null" >
+        uptime = #{uptime,jdbcType=VARCHAR},
+      </if>
+      <if test="introduce != null" >
+        introduce = #{introduce,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.ywl.entity.BlogPhoto" >
+    update blog_photo
+    set blog_id = #{blogId,jdbcType=VARCHAR},
+      pic = #{pic,jdbcType=VARCHAR},
+      views = #{views,jdbcType=INTEGER},
+      addtime = #{addtime,jdbcType=VARCHAR},
+      uptime = #{uptime,jdbcType=VARCHAR},
+      introduce = #{introduce,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ywl.entity.BlogPhoto" >
+    update blog_photo
+    set blog_id = #{blogId,jdbcType=VARCHAR},
+      pic = #{pic,jdbcType=VARCHAR},
+      views = #{views,jdbcType=INTEGER},
+      addtime = #{addtime,jdbcType=VARCHAR},
+      uptime = #{uptime,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>
